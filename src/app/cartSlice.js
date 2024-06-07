@@ -30,11 +30,14 @@ const cart=createSlice({
              state.item.splice(existingItemIndex,1)
            }
         }
-     }
+        },
+        clearCart:(state)=>{
+             state.item =[]
+        }
     }
 
 })
 
 export const selectCartCount = (state) => state.cart.item.length;
-export const {addToCart ,removeFromCart}=cart.actions
+export const {addToCart ,removeFromCart ,clearCart}=cart.actions
 export default cart.reducer;

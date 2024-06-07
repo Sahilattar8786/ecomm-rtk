@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box,Card, CardContent, CardMedia,CardActions, Grid, Typography,Button} from '@mui/material';
-import { addToCart,removeFromCart } from '../app/cartSlice';
+import { addToCart,clearCart,removeFromCart } from '../app/cartSlice';
 import { addOrder } from '../app/orderSlice';
 export default function Cart() {
   const cartItems=useSelector(state =>state.cart.item) ;
@@ -39,12 +39,13 @@ export default function Cart() {
       orderDate: new Date().toISOString()
     };
      dispatch(addOrder(order));
+     dispatch(clearCart());
    }
 
   return (
     <div>
       {
-      cartItems ? 
+      cartItems && cartItems.length > 0 ? 
       <Grid container spacing={2} padding={2} >
        {
          cartItems.map((i)=>(

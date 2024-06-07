@@ -2,10 +2,11 @@ import { Button, Card, CardActions, CardContent, CardMedia, Divider, Stack, Typo
 import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, selectCartCount } from '../app/cartSlice'
+import { getProduct } from '../app/productSlice'
 
 export default function Product() {
 
-  const [products,setProducts]=useState([])   
+  const products=useSelector(state=>state.product.data); 
   const dispatch=useDispatch()
 
   const AddTocart=(product)=>{
@@ -15,10 +16,7 @@ export default function Product() {
   }
   useEffect(()=>{
      //api call
-     fetch(`https://fakestoreapi.com/products`)
-     .then(data=>data.json())
-     .then(result=>setProducts(result))
-     .catch((error)=>console.log(error))
+       dispatch(getProduct())
   },[]) 
   console.log("Products Called",products);
   const cartcount=useSelector(selectCartCount)

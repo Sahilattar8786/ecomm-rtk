@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { clearCart } from "./cartSlice";
+import { useDispatch } from "react-redux";
 
 
 
@@ -14,7 +16,8 @@ const createOrder=createSlice({
             state.splice(action.payload,1)
         }
 
-    }
+
+    },
 })
 
 
